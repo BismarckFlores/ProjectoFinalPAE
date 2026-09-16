@@ -5,5 +5,8 @@ module ni.edu.uam.gestionclientes {
 
 
     opens ni.edu.uam.gestionclientes to javafx.fxml;
+    opens ni.edu.uam.gestionclientes.models to javafx.fxml, javafx.base;
+
     exports ni.edu.uam.gestionclientes;
+    exports ni.edu.uam.gestionclientes.models;
 }
