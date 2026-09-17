@@ -8,29 +8,35 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox spacing="15.0" xmlns:fx="http://javafx.com/fxml"
+<VBox alignment="TOP_CENTER" spacing="15.0" xmlns:fx="http://javafx.com/fxml"
       fx:controller="ni.edu.uam.gestionclientes.controllers.ClientListController"
-      prefWidth="720.0" prefHeight="480.0" styleClass="root-pane">
+      styleClass="root-pane">
     <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+        <Insets bottom="24.0" left="24.0" right="24.0" top="24.0"/>
     </padding>
 
-    <Label text="Consulta de Clientes" styleClass="title-label"/>
-    <Label text="Doble clic sobre una fila para ver el detalle del cliente."/>
+    <VBox styleClass="card" spacing="14.0" VBox.vgrow="ALWAYS">
+        <padding>
+            <Insets bottom="20.0" left="24.0" right="24.0" top="20.0"/>
+        </padding>
 
-    <TableView fx:id="tableClients" VBox.vgrow="ALWAYS" onMouseClicked="#onTableRowClicked">
-        <columns>
-            <TableColumn fx:id="colFullName" text="Nombre Completo" prefWidth="180.0"/>
-            <TableColumn fx:id="colCustomerType" text="Tipo de Cliente" prefWidth="130.0"/>
-            <TableColumn fx:id="colCity" text="Ciudad" prefWidth="120.0"/>
-            <TableColumn fx:id="colBirthDate" text="Fecha de Nacimiento" prefWidth="140.0"/>
-            <TableColumn fx:id="colRequestType" text="Tipo de Solicitud" prefWidth="130.0"/>
-        </columns>
-    </TableView>
+        <Label text="Consulta de Clientes" styleClass="title-label"/>
+        <Label text="Doble clic sobre una fila para ver el detalle del cliente." styleClass="subtitle-label"/>
 
-    <HBox spacing="15.0" alignment="CENTER">
-        <Button fx:id="btnSearch" text="Buscar Cliente..." onAction="#onSearchAction"/>
-        <Button fx:id="btnExport" text="Exportar a Carpeta..." onAction="#onExportAction"/>
-        <Button fx:id="btnBack" text="Volver al Menú" onAction="#onBackAction" cancelButton="true"/>
-    </HBox>
+        <TableView fx:id="tableClients" VBox.vgrow="ALWAYS" onMouseClicked="#onTableRowClicked">
+            <columns>
+                <TableColumn fx:id="colFullName" text="Nombre Completo" prefWidth="180.0"/>
+                <TableColumn fx:id="colCustomerType" text="Tipo de Cliente" prefWidth="130.0"/>
+                <TableColumn fx:id="colCity" text="Ciudad" prefWidth="120.0"/>
+                <TableColumn fx:id="colBirthDate" text="Fecha de Nacimiento" prefWidth="140.0"/>
+                <TableColumn fx:id="colRequestType" text="Tipo de Solicitud" prefWidth="130.0"/>
+            </columns>
+        </TableView>
+
+        <HBox spacing="12.0" alignment="CENTER_RIGHT">
+            <Button fx:id="btnBack" text="Volver al Menú" onAction="#onBackAction" styleClass="button-secondary" cancelButton="true"/>
+            <Button fx:id="btnSearch" text="Buscar Cliente..." onAction="#onSearchAction" styleClass="button-secondary"/>
+            <Button fx:id="btnExport" text="Exportar a Carpeta..." onAction="#onExportAction"/>
+        </HBox>
+    </VBox>
 </VBox>

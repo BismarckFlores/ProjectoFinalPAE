@@ -11,12 +11,13 @@
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.SVGPath?>
 
 <BorderPane xmlns:fx="http://javafx.com/fxml"
-            fx:controller="ni.edu.uam.gestionclientes.controllers.MainMenuController"
-            prefWidth="640.0" prefHeight="420.0">
+            fx:controller="ni.edu.uam.gestionclientes.controllers.AppShellController"
+            prefWidth="960.0" prefHeight="640.0">
 
     <fx:define>
         <ContextMenu fx:id="contextMenu">
@@ -78,28 +79,26 @@
     </top>
 
     <center>
-        <VBox fx:id="workspacePane" alignment="CENTER" spacing="20.0" styleClass="root-pane">
-            <padding>
-                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-            </padding>
+        <StackPane fx:id="contentArea" styleClass="root-pane">
+            <VBox fx:id="homePane" alignment="CENTER" spacing="18.0">
+                <padding>
+                    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+                </padding>
 
-            <Label fx:id="lblBienvenida" text="Bienvenido al Sistema de Gestión de Clientes" styleClass="title-label"/>
-            <Label fx:id="lblEstado"/>
-            <Label text="Clic derecho aquí para el menú contextual" style="-fx-font-style: italic;"/>
+                <VBox styleClass="brand-badge" alignment="CENTER">
+                    <Label text="GC" styleClass="brand-badge-text"/>
+                </VBox>
 
-            <HBox spacing="15.0" alignment="CENTER">
-                <Button fx:id="btnRegistrarCliente" text="Registrar Cliente" onAction="#onMenuRegistroClick"/>
-                <Button fx:id="btnConsultarClientes" text="Consultar Clientes" onAction="#onMenuConsultaClick"/>
-            </HBox>
+                <Label fx:id="lblBienvenida" text="Bienvenido al Sistema de Gestión de Clientes" styleClass="title-label"/>
+                <Label fx:id="lblEstado" styleClass="subtitle-label"/>
+                <Label text="Clic derecho aquí para el menú contextual" styleClass="subtitle-label"/>
 
-            <HBox spacing="15.0" alignment="CENTER">
-                <Button fx:id="btnAdminPanel" text="Panel de Administración" onAction="#onAdminPanelClick"/>
-            </HBox>
-
-            <HBox spacing="15.0" alignment="CENTER">
-                <Button fx:id="btnCerrarSesion" text="Cerrar Sesión" onAction="#onCerrarSesionClick"/>
-                <Button fx:id="btnSalir" text="Salir" onAction="#onSalirClick"/>
-            </HBox>
-        </VBox>
+                <HBox spacing="12.0" alignment="CENTER">
+                    <Button fx:id="btnRegistrarCliente" text="Registrar Cliente" onAction="#onMenuRegistroClick"/>
+                    <Button fx:id="btnConsultarClientes" text="Consultar Clientes" onAction="#onMenuConsultaClick"/>
+                    <Button fx:id="btnAdminPanel" text="Panel de Administración" onAction="#onAdminPanelClick" styleClass="button-secondary"/>
+                </HBox>
+            </VBox>
+        </StackPane>
     </center>
 </BorderPane>

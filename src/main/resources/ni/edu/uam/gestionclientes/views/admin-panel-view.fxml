@@ -8,27 +8,33 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox spacing="15.0" xmlns:fx="http://javafx.com/fxml"
+<VBox alignment="TOP_CENTER" spacing="15.0" xmlns:fx="http://javafx.com/fxml"
       fx:controller="ni.edu.uam.gestionclientes.controllers.AdminPanelController"
-      prefWidth="560.0" prefHeight="420.0" styleClass="root-pane">
+      styleClass="root-pane">
     <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+        <Insets bottom="24.0" left="24.0" right="24.0" top="24.0"/>
     </padding>
 
-    <Label text="Panel de Administración" styleClass="title-label"/>
-    <Label text="Cuentas registradas en el sistema"/>
+    <VBox styleClass="card" spacing="14.0" VBox.vgrow="ALWAYS">
+        <padding>
+            <Insets bottom="20.0" left="24.0" right="24.0" top="20.0"/>
+        </padding>
 
-    <TableView fx:id="tableUsers" VBox.vgrow="ALWAYS">
-        <columns>
-            <TableColumn fx:id="colUsername" text="Usuario" prefWidth="180.0"/>
-            <TableColumn fx:id="colRole" text="Rol" prefWidth="160.0"/>
-            <TableColumn fx:id="colActive" text="Activo" prefWidth="80.0"/>
-        </columns>
-    </TableView>
+        <Label text="Panel de Administración" styleClass="title-label"/>
+        <Label text="Cuentas registradas en el sistema" styleClass="subtitle-label"/>
 
-    <HBox spacing="15.0" alignment="CENTER">
-        <Button text="Nueva Cuenta" onAction="#onNewAccountAction"/>
-        <Button text="Eliminar Cuenta" onAction="#onDeleteAccountAction"/>
-        <Button text="Volver al Menú" onAction="#onBackAction" cancelButton="true"/>
-    </HBox>
+        <TableView fx:id="tableUsers" VBox.vgrow="ALWAYS">
+            <columns>
+                <TableColumn fx:id="colUsername" text="Usuario" prefWidth="180.0"/>
+                <TableColumn fx:id="colRole" text="Rol" prefWidth="160.0"/>
+                <TableColumn fx:id="colActive" text="Activo" prefWidth="80.0"/>
+            </columns>
+        </TableView>
+
+        <HBox spacing="12.0" alignment="CENTER_RIGHT">
+            <Button text="Volver al Menú" onAction="#onBackAction" styleClass="button-secondary" cancelButton="true"/>
+            <Button text="Eliminar Cuenta" onAction="#onDeleteAccountAction" styleClass="button-danger"/>
+            <Button text="Nueva Cuenta" onAction="#onNewAccountAction"/>
+        </HBox>
+    </VBox>
 </VBox>

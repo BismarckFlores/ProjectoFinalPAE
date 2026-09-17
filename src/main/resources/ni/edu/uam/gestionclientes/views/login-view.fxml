@@ -6,30 +6,40 @@
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER" spacing="15.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="ni.edu.uam.gestionclientes.controllers.LoginController"
-      styleClass="root-pane" prefWidth="380.0" prefHeight="320.0">
-    <padding>
-        <Insets bottom="30.0" left="30.0" right="30.0" top="30.0"/>
-    </padding>
+<StackPane xmlns:fx="http://javafx.com/fxml"
+           fx:controller="ni.edu.uam.gestionclientes.controllers.LoginController"
+           styleClass="root-pane">
 
-    <Label text="Sistema de Gestión de Clientes" styleClass="title-label"/>
-    <Label text="Inicie sesión para continuar"/>
+    <VBox styleClass="card" alignment="CENTER" spacing="18.0" maxWidth="360.0" maxHeight="-Infinity">
+        <padding>
+            <Insets bottom="32.0" left="32.0" right="32.0" top="32.0"/>
+        </padding>
 
-    <VBox spacing="8.0" alignment="CENTER_LEFT">
-        <Label text="Usuario"/>
-        <TextField fx:id="txtUsername" promptText="admin"/>
+        <VBox styleClass="brand-badge" alignment="CENTER">
+            <Label text="GC" styleClass="brand-badge-text"/>
+        </VBox>
+
+        <VBox alignment="CENTER" spacing="4.0">
+            <Label text="Gestión de Clientes" styleClass="title-label"/>
+            <Label text="Inicie sesión para continuar" styleClass="subtitle-label"/>
+        </VBox>
+
+        <VBox spacing="8.0" alignment="CENTER_LEFT">
+            <Label text="Usuario"/>
+            <TextField fx:id="txtUsername" promptText="admin"/>
+        </VBox>
+
+        <VBox spacing="8.0" alignment="CENTER_LEFT">
+            <Label text="Contraseña"/>
+            <PasswordField fx:id="pfPassword" promptText="admin123" onKeyPressed="#onPasswordKeyPressed"/>
+        </VBox>
+
+        <HBox spacing="10.0" alignment="CENTER">
+            <Button fx:id="btnLogin" text="Ingresar" onAction="#onLoginAction" defaultButton="true"/>
+            <Button fx:id="btnExit" text="Salir" onAction="#onExitAction" styleClass="button-secondary" cancelButton="true"/>
+        </HBox>
     </VBox>
-
-    <VBox spacing="8.0" alignment="CENTER_LEFT">
-        <Label text="Contraseña"/>
-        <PasswordField fx:id="pfPassword" promptText="admin123" onKeyPressed="#onPasswordKeyPressed"/>
-    </VBox>
-
-    <HBox spacing="10.0" alignment="CENTER">
-        <Button fx:id="btnLogin" text="Ingresar" onAction="#onLoginAction" defaultButton="true"/>
-        <Button fx:id="btnExit" text="Salir" onAction="#onExitAction" cancelButton="true"/>
-    </HBox>
-</VBox>
+</StackPane>
