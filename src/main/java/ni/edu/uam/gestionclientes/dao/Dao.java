@@ -11,7 +11,7 @@ public interface Dao<T, ID> {
 
     void save(T entity);
 
-    boolean refresh(ID id, T entidad);
+    boolean refresh(ID id, T entity);
 
     boolean delete(ID id);
 }

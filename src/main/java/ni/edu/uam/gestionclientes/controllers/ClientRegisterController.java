@@ -10,6 +10,7 @@ import ni.edu.uam.gestionclientes.dao.Dao;
 import ni.edu.uam.gestionclientes.models.Client;
 import ni.edu.uam.gestionclientes.util.AlertHelper;
 import ni.edu.uam.gestionclientes.util.FileChooserHelper;
+import ni.edu.uam.gestionclientes.util.SceneManager;
 
 import java.io.File;
 import java.time.LocalDate;
@@ -57,14 +58,8 @@ public class ClientRegisterController {
     // Ruta de la imagen seleccionada
     private String selectedImagePath;
 
-    // Repositorio
-    private final Dao<Client, String> clientDao;
-
-    public ClientRegisterController() {
-        // En una app más grande esto podría ser inyectado, 
-        // pero por ahora instanciamos directamente o usamos un Singleton.
-        this.clientDao = new ClientDaoImpl();
-    }
+    // Repositorio compartido: el mismo singleton que alimenta la tabla de Búsqueda.
+    private final Dao<Client, String> clientDao = ClientDaoImpl.getInstance();
 
     @FXML
     public void initialize() {
@@ -143,8 +138,6 @@ public class ClientRegisterController {
 
     @FXML
     public void onCancelAction(ActionEvent event) {
-        // Lógica para cancelar y volver al menú principal
-        // Aquí eventualmente llamarás a SceneManager.cambiarEscena("main-view.fxml");
-        System.out.println("Regresando al menú principal...");
+        SceneManager.sceneChange("main-menu-view.fxml");
     }
 }
