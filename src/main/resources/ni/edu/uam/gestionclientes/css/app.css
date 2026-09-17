@@ -1,0 +1,42 @@
+.root-pane {
+    -fx-background-color: #f4f6f8;
+    -fx-font-family: "Segoe UI", sans-serif;
+}
+
+.title-label {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1f3a5f;
+}
+
+.button {
+    -fx-background-color: #2f6fa5;
+    -fx-text-fill: white;
+    -fx-background-radius: 4px;
+    -fx-padding: 6px 14px;
+}
+
+.button:hover {
+    -fx-background-color: #24567f;
+}
+
+.table-view {
+    -fx-background-color: white;
+}
+
+.icon-button {
+    -fx-background-color: transparent;
+    -fx-padding: 4px 10px;
+}
+
+.icon-button:hover {
+    -fx-background-color: #dfe7ee;
+}
+
+.icon-shape {
+    -fx-fill: #1f3a5f;
+}
+
+.icon-button:hover .icon-shape {
+    -fx-fill: #12293f;
+}
