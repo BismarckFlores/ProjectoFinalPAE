@@ -10,7 +10,7 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ToolBar;
 import ni.edu.uam.gestionclientes.util.AlertHelper;
-// import ni.edu.uam.gestionclientes.util.SceneManager;
+import ni.edu.uam.gestionclientes.util.SceneManager;
 
 /**
  * Controlador de la Ventana Principal / Menú de Navegación del Sistema.
@@ -99,8 +99,7 @@ public class MainMenuController {
      */
     @FXML
     public void onMenuRegistroClick(ActionEvent event) {
-        System.out.println("[MainMenuController] Navegando a Registro de Cliente...");
-        // TODO: Dev 1 proveerá SceneManager.cambiarEscena("client-registration-view.fxml");
+        SceneManager.sceneChange("client-registration-view.fxml");
     }
 
     /**
@@ -108,8 +107,7 @@ public class MainMenuController {
      */
     @FXML
     public void onMenuConsultaClick(ActionEvent event) {
-        System.out.println("[MainMenuController] Navegando a Consulta de Clientes...");
-        // TODO: Dev 1 proveerá SceneManager.cambiarEscena("client-list-view.fxml");
+        SceneManager.sceneChange("client-list-view.fxml");
     }
 
     /**
@@ -123,8 +121,7 @@ public class MainMenuController {
                 "¿Está seguro que desea cerrar la sesión actual?"
         );
         if (confirmar) {
-            System.out.println("[MainMenuController] Cerrando sesión...");
-            // TODO: Dev 1 proveerá SceneManager.cambiarEscena("login-view.fxml");
+            SceneManager.sceneChange("login-view.fxml");
         }
     }
 

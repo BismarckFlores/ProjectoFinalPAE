@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="ni.edu.uam.gestionclientes.controllers.MainMenuController"
+            prefWidth="640.0" prefHeight="420.0">
+
+    <top>
+        <VBox>
+            <MenuBar fx:id="menuBar">
+                <Menu text="Menú">
+                    <MenuItem fx:id="menuRegistro" text="Registrar Cliente" onAction="#onMenuRegistroClick"/>
+                    <MenuItem fx:id="menuConsulta" text="Consultar Clientes" onAction="#onMenuConsultaClick"/>
+                    <MenuItem fx:id="menuCerrarSesion" text="Cerrar Sesión" onAction="#onCerrarSesionClick"/>
+                    <MenuItem fx:id="menuSalir" text="Salir" onAction="#onSalirClick"/>
+                </Menu>
+                <Menu text="Ayuda">
+                    <MenuItem fx:id="menuAcercaDe" text="Acerca De" onAction="#onAcercaDeClick"/>
+                </Menu>
+            </MenuBar>
+            <ToolBar fx:id="toolBar">
+                <Button fx:id="btnToolBarRegistro" text="Registrar" onAction="#onMenuRegistroClick"/>
+                <Button fx:id="btnToolBarConsulta" text="Consultar" onAction="#onMenuConsultaClick"/>
+                <Button fx:id="btnToolBarCerrarSesion" text="Cerrar Sesión" onAction="#onCerrarSesionClick"/>
+            </ToolBar>
+        </VBox>
+    </top>
+
+    <center>
+        <VBox alignment="CENTER" spacing="20.0" styleClass="root-pane">
+            <padding>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+            </padding>
+
+            <Label fx:id="lblBienvenida" text="Bienvenido al Sistema de Gestión de Clientes" styleClass="title-label"/>
+            <Label fx:id="lblEstado"/>
+
+            <HBox spacing="15.0" alignment="CENTER">
+                <Button fx:id="btnRegistrarCliente" text="Registrar Cliente" onAction="#onMenuRegistroClick"/>
+                <Button fx:id="btnConsultarClientes" text="Consultar Clientes" onAction="#onMenuConsultaClick"/>
+            </HBox>
+
+            <HBox spacing="15.0" alignment="CENTER">
+                <Button fx:id="btnCerrarSesion" text="Cerrar Sesión" onAction="#onCerrarSesionClick"/>
+                <Button fx:id="btnSalir" text="Salir" onAction="#onSalirClick"/>
+            </HBox>
+
+            <contextMenu>
+                <ContextMenu fx:id="contextMenu">
+                    <items>
+                        <MenuItem fx:id="contextItemRegistro" text="Registrar Cliente" onAction="#onMenuRegistroClick"/>
+                        <MenuItem fx:id="contextItemConsulta" text="Consultar Clientes" onAction="#onMenuConsultaClick"/>
+                        <MenuItem fx:id="contextItemInfo" text="Información" onAction="#onContextInfoClick"/>
+                    </items>
+                </ContextMenu>
+            </contextMenu>
+        </VBox>
+    </center>
+</BorderPane>
