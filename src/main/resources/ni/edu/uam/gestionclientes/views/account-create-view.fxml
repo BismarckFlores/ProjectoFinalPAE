@@ -11,33 +11,39 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="TOP_CENTER" spacing="15.0" xmlns:fx="http://javafx.com/fxml"
+<VBox alignment="TOP_CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
       fx:controller="ni.edu.uam.gestionclientes.controllers.AccountCreateController"
       styleClass="root-pane">
     <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+        <Insets bottom="24.0" left="24.0" right="24.0" top="24.0"/>
     </padding>
 
-    <Label text="Nueva Cuenta de Usuario" styleClass="title-label"/>
+    <VBox styleClass="card" spacing="16.0" maxWidth="440.0">
+        <padding>
+            <Insets bottom="28.0" left="28.0" right="28.0" top="24.0"/>
+        </padding>
 
-    <GridPane hgap="10.0" vgap="10.0" maxWidth="420.0">
-        <columnConstraints>
-            <ColumnConstraints minWidth="100.0"/>
-            <ColumnConstraints minWidth="200.0"/>
-        </columnConstraints>
+        <Label text="Nueva Cuenta de Usuario" styleClass="title-label"/>
 
-        <Label text="Usuario" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
-        <TextField fx:id="txtNewUsername" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+        <GridPane hgap="10.0" vgap="10.0">
+            <columnConstraints>
+                <ColumnConstraints minWidth="100.0"/>
+                <ColumnConstraints minWidth="200.0"/>
+            </columnConstraints>
 
-        <Label text="Contraseña" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
-        <PasswordField fx:id="pfNewPassword" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+            <Label text="Usuario" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+            <TextField fx:id="txtNewUsername" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
 
-        <Label text="Rol" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
-        <ComboBox fx:id="cmbRole" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
-    </GridPane>
+            <Label text="Contraseña" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+            <PasswordField fx:id="pfNewPassword" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
 
-    <HBox spacing="15.0" alignment="CENTER">
-        <Button text="Guardar" onAction="#onSaveAction" defaultButton="true"/>
-        <Button text="Cancelar" onAction="#onCancelAction" cancelButton="true"/>
-    </HBox>
+            <Label text="Rol" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+            <ComboBox fx:id="cmbRole" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+        </GridPane>
+
+        <HBox spacing="12.0" alignment="CENTER_RIGHT">
+            <Button text="Cancelar" onAction="#onCancelAction" styleClass="button-secondary" cancelButton="true"/>
+            <Button text="Guardar" onAction="#onSaveAction" defaultButton="true"/>
+        </HBox>
+    </VBox>
 </VBox>

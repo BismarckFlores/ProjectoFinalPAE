@@ -80,19 +80,23 @@
 
     <center>
         <StackPane fx:id="contentArea" styleClass="root-pane">
-            <VBox fx:id="homePane" alignment="CENTER" spacing="20.0">
+            <VBox fx:id="homePane" alignment="CENTER" spacing="18.0">
                 <padding>
                     <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
                 </padding>
 
-                <Label fx:id="lblBienvenida" text="Bienvenido al Sistema de Gestión de Clientes" styleClass="title-label"/>
-                <Label fx:id="lblEstado"/>
-                <Label text="Clic derecho aquí para el menú contextual" style="-fx-font-style: italic;"/>
+                <VBox styleClass="brand-badge" alignment="CENTER">
+                    <Label text="GC" styleClass="brand-badge-text"/>
+                </VBox>
 
-                <HBox spacing="15.0" alignment="CENTER">
+                <Label fx:id="lblBienvenida" text="Bienvenido al Sistema de Gestión de Clientes" styleClass="title-label"/>
+                <Label fx:id="lblEstado" styleClass="subtitle-label"/>
+                <Label text="Clic derecho aquí para el menú contextual" styleClass="subtitle-label"/>
+
+                <HBox spacing="12.0" alignment="CENTER">
                     <Button fx:id="btnRegistrarCliente" text="Registrar Cliente" onAction="#onMenuRegistroClick"/>
                     <Button fx:id="btnConsultarClientes" text="Consultar Clientes" onAction="#onMenuConsultaClick"/>
-                    <Button fx:id="btnAdminPanel" text="Panel de Administración" onAction="#onAdminPanelClick"/>
+                    <Button fx:id="btnAdminPanel" text="Panel de Administración" onAction="#onAdminPanelClick" styleClass="button-secondary"/>
                 </HBox>
             </VBox>
         </StackPane>

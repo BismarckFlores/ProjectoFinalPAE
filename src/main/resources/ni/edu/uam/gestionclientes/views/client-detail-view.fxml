@@ -9,43 +9,51 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="TOP_CENTER" spacing="15.0" xmlns:fx="http://javafx.com/fxml"
+<VBox alignment="TOP_CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
       fx:controller="ni.edu.uam.gestionclientes.controllers.ClientDetailController"
       styleClass="root-pane">
     <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+        <Insets bottom="24.0" left="24.0" right="24.0" top="24.0"/>
     </padding>
 
-    <Label text="Detalle de Cliente" styleClass="title-label"/>
+    <VBox styleClass="card" spacing="18.0" maxWidth="560.0">
+        <padding>
+            <Insets bottom="28.0" left="28.0" right="28.0" top="24.0"/>
+        </padding>
 
-    <HBox spacing="20.0" alignment="CENTER_LEFT" maxWidth="560.0">
-        <ImageView fx:id="imgPhoto" fitWidth="120.0" fitHeight="120.0" preserveRatio="true"/>
+        <Label text="Detalle de Cliente" styleClass="title-label"/>
 
-        <GridPane hgap="10.0" vgap="10.0">
-            <columnConstraints>
-                <ColumnConstraints minWidth="140.0"/>
-                <ColumnConstraints minWidth="180.0"/>
-            </columnConstraints>
+        <HBox spacing="20.0" alignment="CENTER_LEFT">
+            <ImageView fx:id="imgPhoto" fitWidth="110.0" fitHeight="110.0" preserveRatio="true"/>
 
-            <Label text="Nombre Completo:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
-            <Label fx:id="lblFullName" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+            <GridPane hgap="10.0" vgap="10.0">
+                <columnConstraints>
+                    <ColumnConstraints minWidth="140.0"/>
+                    <ColumnConstraints minWidth="180.0"/>
+                </columnConstraints>
 
-            <Label text="Tipo de Cliente:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
-            <Label fx:id="lblCustomerType" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+                <Label text="Nombre Completo:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                <Label fx:id="lblFullName" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
 
-            <Label text="Ciudad:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
-            <Label fx:id="lblCity" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+                <Label text="Tipo de Cliente:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                <Label fx:id="lblCustomerType" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
 
-            <Label text="Fecha de Nacimiento:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
-            <Label fx:id="lblBirthDate" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+                <Label text="Ciudad:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                <Label fx:id="lblCity" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
 
-            <Label text="Tipo de Solicitud:" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
-            <Label fx:id="lblRequestType" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+                <Label text="Fecha de Nacimiento:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                <Label fx:id="lblBirthDate" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
 
-            <Label text="Servicios de Interés:" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
-            <Label fx:id="lblServices" wrapText="true" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
-        </GridPane>
-    </HBox>
+                <Label text="Tipo de Solicitud:" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+                <Label fx:id="lblRequestType" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
 
-    <Button text="Volver" onAction="#onBackAction" cancelButton="true"/>
+                <Label text="Servicios de Interés:" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+                <Label fx:id="lblServices" wrapText="true" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+            </GridPane>
+        </HBox>
+
+        <HBox alignment="CENTER_RIGHT">
+            <Button text="Volver" onAction="#onBackAction" styleClass="button-secondary" cancelButton="true"/>
+        </HBox>
+    </VBox>
 </VBox>

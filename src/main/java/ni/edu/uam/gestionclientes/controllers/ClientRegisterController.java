@@ -66,6 +66,16 @@ public class ClientRegisterController {
         // Inicializar datos para los ComboBoxes (para que el Dev 4 no tenga que hacerlo en la UI)
         cmbCustomerType.getItems().addAll("Regular", "VIP", "Corporativo");
         cmbCity.getItems().addAll("Managua", "León", "Granada", "Masaya");
+
+        // Una fecha de nacimiento no puede ser futura: se deshabilita visualmente
+        // en el propio calendario, no solo al validar en el botón Guardar.
+        dpBirthDate.setDayCellFactory(picker -> new DateCell() {
+            @Override
+            public void updateItem(LocalDate date, boolean empty) {
+                super.updateItem(date, empty);
+                setDisable(empty || date.isAfter(LocalDate.now()));
+            }
+        });
     }
 
     @FXML

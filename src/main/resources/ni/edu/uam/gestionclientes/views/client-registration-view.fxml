@@ -15,62 +15,68 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="TOP_CENTER" spacing="15.0" xmlns:fx="http://javafx.com/fxml"
+<VBox alignment="TOP_CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
       fx:controller="ni.edu.uam.gestionclientes.controllers.ClientRegisterController"
       styleClass="root-pane">
     <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+        <Insets bottom="24.0" left="24.0" right="24.0" top="24.0"/>
     </padding>
 
-    <Label text="Registro de Cliente" styleClass="title-label"/>
+    <VBox styleClass="card" spacing="16.0" maxWidth="520.0">
+        <padding>
+            <Insets bottom="28.0" left="28.0" right="28.0" top="24.0"/>
+        </padding>
 
-    <GridPane hgap="10.0" vgap="10.0" maxWidth="500.0">
-        <columnConstraints>
-            <ColumnConstraints minWidth="120.0"/>
-            <ColumnConstraints minWidth="200.0"/>
-        </columnConstraints>
+        <Label text="Registro de Cliente" styleClass="title-label"/>
 
-        <Label text="Nombre" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
-        <TextField fx:id="txtFirstName" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+        <GridPane hgap="10.0" vgap="10.0">
+            <columnConstraints>
+                <ColumnConstraints minWidth="130.0"/>
+                <ColumnConstraints minWidth="220.0"/>
+            </columnConstraints>
 
-        <Label text="Apellido" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
-        <TextField fx:id="txtLastName" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+            <Label text="Nombre" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+            <TextField fx:id="txtFirstName" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
 
-        <Label text="Tipo de Cliente" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
-        <ComboBox fx:id="cmbCustomerType" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+            <Label text="Apellido" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+            <TextField fx:id="txtLastName" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
 
-        <Label text="Ciudad" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
-        <ComboBox fx:id="cmbCity" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+            <Label text="Tipo de Cliente" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+            <ComboBox fx:id="cmbCustomerType" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
 
-        <Label text="Fecha de Nacimiento" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
-        <DatePicker fx:id="dpBirthDate" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
-    </GridPane>
+            <Label text="Ciudad" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+            <ComboBox fx:id="cmbCity" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
 
-    <Label text="Tipo de Solicitud"/>
-    <HBox spacing="15.0" alignment="CENTER">
-        <fx:define>
-            <ToggleGroup fx:id="tgRequestType"/>
-        </fx:define>
-        <RadioButton fx:id="rbConsulta" text="Consulta" toggleGroup="$tgRequestType"/>
-        <RadioButton fx:id="rbReclamo" text="Reclamo" toggleGroup="$tgRequestType"/>
-        <RadioButton fx:id="rbSoporte" text="Soporte" toggleGroup="$tgRequestType"/>
-    </HBox>
+            <Label text="Fecha de Nacimiento" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+            <DatePicker fx:id="dpBirthDate" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+        </GridPane>
 
-    <Label text="Servicios de Interés"/>
-    <HBox spacing="15.0" alignment="CENTER">
-        <CheckBox fx:id="chkInternet" text="Internet"/>
-        <CheckBox fx:id="chkTelefonica" text="Telefonía"/>
-        <CheckBox fx:id="chkTelevision" text="Televisión"/>
-    </HBox>
+        <Label text="Tipo de Solicitud" styleClass="subtitle-label"/>
+        <HBox spacing="15.0" alignment="CENTER_LEFT">
+            <fx:define>
+                <ToggleGroup fx:id="tgRequestType"/>
+            </fx:define>
+            <RadioButton fx:id="rbConsulta" text="Consulta" toggleGroup="$tgRequestType"/>
+            <RadioButton fx:id="rbReclamo" text="Reclamo" toggleGroup="$tgRequestType"/>
+            <RadioButton fx:id="rbSoporte" text="Soporte" toggleGroup="$tgRequestType"/>
+        </HBox>
 
-    <HBox spacing="15.0" alignment="CENTER">
-        <Button text="Seleccionar Foto" onAction="#onSelectPhotoAction"/>
-        <ImageView fx:id="imgPhoto" fitWidth="80.0" fitHeight="80.0" preserveRatio="true"/>
-    </HBox>
+        <Label text="Servicios de Interés" styleClass="subtitle-label"/>
+        <HBox spacing="15.0" alignment="CENTER_LEFT">
+            <CheckBox fx:id="chkInternet" text="Internet"/>
+            <CheckBox fx:id="chkTelefonica" text="Telefonía"/>
+            <CheckBox fx:id="chkTelevision" text="Televisión"/>
+        </HBox>
 
-    <HBox spacing="15.0" alignment="CENTER">
-        <Button text="Guardar" onAction="#onSaveAction" defaultButton="true"/>
-        <Button text="Limpiar" onAction="#onClearAction"/>
-        <Button text="Cancelar" onAction="#onCancelAction" cancelButton="true"/>
-    </HBox>
+        <HBox spacing="15.0" alignment="CENTER_LEFT">
+            <Button text="Seleccionar Foto" onAction="#onSelectPhotoAction" styleClass="button-secondary"/>
+            <ImageView fx:id="imgPhoto" fitWidth="72.0" fitHeight="72.0" preserveRatio="true"/>
+        </HBox>
+
+        <HBox spacing="12.0" alignment="CENTER_RIGHT">
+            <Button text="Limpiar" onAction="#onClearAction" styleClass="button-secondary"/>
+            <Button text="Cancelar" onAction="#onCancelAction" styleClass="button-secondary" cancelButton="true"/>
+            <Button text="Guardar" onAction="#onSaveAction" defaultButton="true"/>
+        </HBox>
+    </VBox>
 </VBox>
