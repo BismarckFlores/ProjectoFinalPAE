@@ -66,6 +66,16 @@ public class ClientRegisterController {
         // Inicializar datos para los ComboBoxes (para que el Dev 4 no tenga que hacerlo en la UI)
         cmbCustomerType.getItems().addAll("Regular", "VIP", "Corporativo");
         cmbCity.getItems().addAll("Managua", "León", "Granada", "Masaya");
+
+        // Una fecha de nacimiento no puede ser futura: se deshabilita visualmente
+        // en el propio calendario, no solo al validar en el botón Guardar.
+        dpBirthDate.setDayCellFactory(picker -> new DateCell() {
+            @Override
+            public void updateItem(LocalDate date, boolean empty) {
+                super.updateItem(date, empty);
+                setDisable(empty || date.isAfter(LocalDate.now()));
+            }
+        });
     }
 
     @FXML
@@ -82,17 +92,33 @@ public class ClientRegisterController {
     @FXML
     public void onSaveAction(ActionEvent event) {
         // Validar datos básicos
-        if (txtFirstName.getText().isEmpty() || txtLastName.getText().isEmpty() || dpBirthDate.getValue() == null) {
-            AlertHelper.showWarning("Campos incompletos", null, "Por favor llene los nombres, apellidos y fecha de nacimiento.");
+        if (txtFirstName.getText() == null || txtFirstName.getText().isBlank()
+                || txtLastName.getText() == null || txtLastName.getText().isBlank()) {
+            AlertHelper.showWarning("Campos incompletos", null, "Por favor llene los nombres y apellidos.");
             return;
         }
-
-        // Obtener tipo de solicitud del ToggleGroup
-        String requestType = "";
-        RadioButton selectedRadio = (RadioButton) tgRequestType.getSelectedToggle();
-        if (selectedRadio != null) {
-            requestType = selectedRadio.getText();
+        if (cmbCustomerType.getValue() == null) {
+            AlertHelper.showWarning("Campos incompletos", null, "Seleccione el tipo de cliente.");
+            return;
         }
+        if (cmbCity.getValue() == null) {
+            AlertHelper.showWarning("Campos incompletos", null, "Seleccione la ciudad.");
+            return;
+        }
+        if (dpBirthDate.getValue() == null) {
+            AlertHelper.showWarning("Campos incompletos", null, "Seleccione la fecha de nacimiento.");
+            return;
+        }
+        if (dpBirthDate.getValue().isAfter(LocalDate.now())) {
+            AlertHelper.showWarning("Fecha inválida", null, "La fecha de nacimiento no puede ser futura.");
+            return;
+        }
+        RadioButton selectedRadio = (RadioButton) tgRequestType.getSelectedToggle();
+        if (selectedRadio == null) {
+            AlertHelper.showWarning("Campos incompletos", null, "Seleccione el tipo de solicitud.");
+            return;
+        }
+        String requestType = selectedRadio.getText();
 
         // Obtener servicios de los checkboxes
         List<String> services = new ArrayList<>();
@@ -138,6 +164,6 @@ public class ClientRegisterController {
 
     @FXML
     public void onCancelAction(ActionEvent event) {
-        SceneManager.sceneChange("main-menu-view.fxml");
+        SceneManager.showHome();
     }
 }

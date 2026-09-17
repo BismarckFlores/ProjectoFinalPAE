@@ -40,6 +40,12 @@ public class AccountCreateController {
             return;
         }
 
+        if (password.length() < 4) {
+            AlertHelper.showWarning("Contraseña muy corta", null,
+                    "La contraseña debe tener al menos 4 caracteres.");
+            return;
+        }
+
         if (UserDaoImpl.getInstance().usernameExists(username)) {
             AlertHelper.showWarning("Usuario existente", null,
                     "Ya existe una cuenta con ese nombre de usuario.");
@@ -57,11 +63,11 @@ public class AccountCreateController {
         UserDaoImpl.getInstance().save(newUser);
         AlertHelper.showInfo("Cuenta creada", null,
                 "La cuenta \"" + username + "\" se creó correctamente con rol " + role + ".");
-        SceneManager.sceneChange("admin-panel-view.fxml");
+        SceneManager.setContent("admin-panel-view.fxml");
     }
 
     @FXML
     public void onCancelAction(ActionEvent event) {
-        SceneManager.sceneChange("admin-panel-view.fxml");
+        SceneManager.setContent("admin-panel-view.fxml");
     }
 }

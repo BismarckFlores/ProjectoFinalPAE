@@ -38,7 +38,7 @@ public class AdminPanelController {
 
     @FXML
     public void onNewAccountAction(ActionEvent event) {
-        SceneManager.sceneChange("account-create-view.fxml");
+        SceneManager.setContent("account-create-view.fxml");
     }
 
     @FXML
@@ -68,6 +68,6 @@ public class AdminPanelController {
 
     @FXML
     public void onBackAction(ActionEvent event) {
-        SceneManager.sceneChange("main-menu-view.fxml");
+        SceneManager.showHome();
     }
 }

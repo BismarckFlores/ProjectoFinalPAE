@@ -69,7 +69,7 @@ public class ClientListController {
         if (event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 2) {
             Client selected = tableClients.getSelectionModel().getSelectedItem();
             if (selected != null) {
-                SceneManager.changeSceneWithData("client-detail-view.fxml", selected);
+                SceneManager.setContentWithData("client-detail-view.fxml", selected);
             }
         }
     }
@@ -109,6 +109,6 @@ public class ClientListController {
 
     @FXML
     public void onBackAction(ActionEvent event) {
-        SceneManager.sceneChange("main-menu-view.fxml");
+        SceneManager.showHome();
     }
 }

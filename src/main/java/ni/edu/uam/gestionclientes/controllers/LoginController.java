@@ -60,7 +60,7 @@ public class LoginController {
         }
 
         Session.login(user.get());
-        SceneManager.sceneChange("main-menu-view.fxml");
+        SceneManager.sceneChange("app-shell-view.fxml");
     }
 
     @FXML
