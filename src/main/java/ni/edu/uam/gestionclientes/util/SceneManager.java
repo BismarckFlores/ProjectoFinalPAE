@@ -6,7 +6,6 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import ni.edu.uam.gestionclientes.models.Client;
 
-import java.io.IOException;
 import java.net.URL;
 
 public class SceneManager {
@@ -25,8 +24,8 @@ public class SceneManager {
                     SceneManager.class.getResource("/ni/edu/uam/gestionclientes/views/" + fxmlFile));
             Parent root = loader.load();
             applyScene(root);
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            reportNavigationError(fxmlFile, e);
         }
     }
 
@@ -42,9 +41,15 @@ public class SceneManager {
             }
 
             applyScene(root);
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            reportNavigationError(fxmlFile, e);
         }
+    }
+
+    private static void reportNavigationError(String fxmlFile, Exception e) {
+        e.printStackTrace();
+        AlertHelper.showError("Error de Navegación", null,
+                "No se pudo cargar la pantalla \"" + fxmlFile + "\": " + e);
     }
 
     private static void applyScene(Parent root) {

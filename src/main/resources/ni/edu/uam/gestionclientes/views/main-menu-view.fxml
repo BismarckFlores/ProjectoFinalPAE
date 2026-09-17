@@ -16,6 +16,16 @@
             fx:controller="ni.edu.uam.gestionclientes.controllers.MainMenuController"
             prefWidth="640.0" prefHeight="420.0">
 
+    <fx:define>
+        <ContextMenu fx:id="contextMenu">
+            <items>
+                <MenuItem fx:id="contextItemRegistro" text="Registrar Cliente" onAction="#onMenuRegistroClick"/>
+                <MenuItem fx:id="contextItemConsulta" text="Consultar Clientes" onAction="#onMenuConsultaClick"/>
+                <MenuItem fx:id="contextItemInfo" text="Información" onAction="#onContextInfoClick"/>
+            </items>
+        </ContextMenu>
+    </fx:define>
+
     <top>
         <VBox>
             <MenuBar fx:id="menuBar">
@@ -38,13 +48,14 @@
     </top>
 
     <center>
-        <VBox alignment="CENTER" spacing="20.0" styleClass="root-pane">
+        <VBox fx:id="workspacePane" alignment="CENTER" spacing="20.0" styleClass="root-pane">
             <padding>
                 <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
             </padding>
 
             <Label fx:id="lblBienvenida" text="Bienvenido al Sistema de Gestión de Clientes" styleClass="title-label"/>
             <Label fx:id="lblEstado"/>
+            <Label text="Clic derecho aquí para el menú contextual" style="-fx-font-style: italic;"/>
 
             <HBox spacing="15.0" alignment="CENTER">
                 <Button fx:id="btnRegistrarCliente" text="Registrar Cliente" onAction="#onMenuRegistroClick"/>
@@ -55,16 +66,6 @@
                 <Button fx:id="btnCerrarSesion" text="Cerrar Sesión" onAction="#onCerrarSesionClick"/>
                 <Button fx:id="btnSalir" text="Salir" onAction="#onSalirClick"/>
             </HBox>
-
-            <contextMenu>
-                <ContextMenu fx:id="contextMenu">
-                    <items>
-                        <MenuItem fx:id="contextItemRegistro" text="Registrar Cliente" onAction="#onMenuRegistroClick"/>
-                        <MenuItem fx:id="contextItemConsulta" text="Consultar Clientes" onAction="#onMenuConsultaClick"/>
-                        <MenuItem fx:id="contextItemInfo" text="Información" onAction="#onContextInfoClick"/>
-                    </items>
-                </ContextMenu>
-            </contextMenu>
         </VBox>
     </center>
 </BorderPane>

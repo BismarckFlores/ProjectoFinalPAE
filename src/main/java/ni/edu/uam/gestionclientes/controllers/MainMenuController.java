@@ -9,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ToolBar;
+import javafx.scene.layout.VBox;
 import ni.edu.uam.gestionclientes.util.AlertHelper;
 import ni.edu.uam.gestionclientes.util.SceneManager;
 
@@ -63,6 +64,10 @@ public class MainMenuController {
     @FXML
     private Button btnSalir;
 
+    // --- Área de trabajo donde se activa el Menú Contextual ---
+    @FXML
+    private VBox workspacePane;
+
     // --- Menú Contextual (ContextMenu) ---
     @FXML
     private ContextMenu contextMenu;
@@ -91,6 +96,12 @@ public class MainMenuController {
         System.out.println("[MainMenuController] Inicializado correctamente.");
         if (lblEstado != null) {
             lblEstado.setText("Sistema activo - Menú Principal");
+        }
+        // VBox no es un Control: no tiene soporte nativo de ContextMenu, así que
+        // se muestra manualmente al detectar el evento de clic derecho.
+        if (workspacePane != null && contextMenu != null) {
+            workspacePane.setOnContextMenuRequested(event ->
+                    contextMenu.show(workspacePane, event.getScreenX(), event.getScreenY()));
         }
     }
 
