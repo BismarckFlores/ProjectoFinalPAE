@@ -105,8 +105,6 @@ public class MainMenuController {
      */
     @FXML
     public void initialize() {
-        System.out.println("[MainMenuController] Inicializado correctamente.");
-
         User currentUser = Session.getCurrentUser();
         boolean isAdmin = Session.isAdmin();
 
@@ -209,7 +207,6 @@ public class MainMenuController {
                 "¿Está seguro que desea salir del sistema de gestión de clientes?"
         );
         if (confirmar) {
-            System.out.println("[MainMenuController] Cerrando aplicación.");
             Platform.exit();
             System.exit(0);
         }

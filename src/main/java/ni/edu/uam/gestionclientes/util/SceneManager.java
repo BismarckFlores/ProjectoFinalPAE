@@ -47,7 +47,6 @@ public class SceneManager {
     }
 
     private static void reportNavigationError(String fxmlFile, Exception e) {
-        e.printStackTrace();
         AlertHelper.showError("Error de Navegación", null,
                 "No se pudo cargar la pantalla \"" + fxmlFile + "\": " + e);
     }

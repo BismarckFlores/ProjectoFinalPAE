@@ -33,7 +33,10 @@
     -fx-background-color: #dfe7ee;
 }
 
-.icon-glyph {
-    -fx-font-size: 18px;
-    -fx-text-fill: #1f3a5f;
+.icon-shape {
+    -fx-fill: #1f3a5f;
+}
+
+.icon-button:hover .icon-shape {
+    -fx-fill: #12293f;
 }
