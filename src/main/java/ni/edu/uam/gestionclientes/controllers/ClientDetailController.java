@@ -54,6 +54,6 @@ public class ClientDetailController implements ReceivesClientData {
 
     @FXML
     public void onBackAction(ActionEvent event) {
-        SceneManager.sceneChange("main-menu-view.fxml");
+        SceneManager.showHome();
     }
 }

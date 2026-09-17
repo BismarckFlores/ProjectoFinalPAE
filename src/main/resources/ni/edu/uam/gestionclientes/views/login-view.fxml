@@ -10,7 +10,7 @@
 
 <VBox alignment="CENTER" spacing="15.0" xmlns:fx="http://javafx.com/fxml"
       fx:controller="ni.edu.uam.gestionclientes.controllers.LoginController"
-      styleClass="root-pane" prefWidth="380.0" prefHeight="320.0">
+      styleClass="root-pane">
     <padding>
         <Insets bottom="30.0" left="30.0" right="30.0" top="30.0"/>
     </padding>

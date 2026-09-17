@@ -9,16 +9,16 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox spacing="15.0" xmlns:fx="http://javafx.com/fxml"
+<VBox alignment="TOP_CENTER" spacing="15.0" xmlns:fx="http://javafx.com/fxml"
       fx:controller="ni.edu.uam.gestionclientes.controllers.ClientDetailController"
-      prefWidth="480.0" prefHeight="480.0" styleClass="root-pane">
+      styleClass="root-pane">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
     </padding>
 
     <Label text="Detalle de Cliente" styleClass="title-label"/>
 
-    <HBox spacing="20.0" alignment="CENTER_LEFT">
+    <HBox spacing="20.0" alignment="CENTER_LEFT" maxWidth="560.0">
         <ImageView fx:id="imgPhoto" fitWidth="120.0" fitHeight="120.0" preserveRatio="true"/>
 
         <GridPane hgap="10.0" vgap="10.0">

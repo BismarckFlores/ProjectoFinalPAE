@@ -15,16 +15,16 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox spacing="15.0" xmlns:fx="http://javafx.com/fxml"
+<VBox alignment="TOP_CENTER" spacing="15.0" xmlns:fx="http://javafx.com/fxml"
       fx:controller="ni.edu.uam.gestionclientes.controllers.ClientRegisterController"
-      prefWidth="640.0" prefHeight="560.0" styleClass="root-pane">
+      styleClass="root-pane">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
     </padding>
 
     <Label text="Registro de Cliente" styleClass="title-label"/>
 
-    <GridPane hgap="10.0" vgap="10.0">
+    <GridPane hgap="10.0" vgap="10.0" maxWidth="500.0">
         <columnConstraints>
             <ColumnConstraints minWidth="120.0"/>
             <ColumnConstraints minWidth="200.0"/>
@@ -47,7 +47,7 @@
     </GridPane>
 
     <Label text="Tipo de Solicitud"/>
-    <HBox spacing="15.0">
+    <HBox spacing="15.0" alignment="CENTER">
         <fx:define>
             <ToggleGroup fx:id="tgRequestType"/>
         </fx:define>
@@ -57,13 +57,13 @@
     </HBox>
 
     <Label text="Servicios de Interés"/>
-    <HBox spacing="15.0">
+    <HBox spacing="15.0" alignment="CENTER">
         <CheckBox fx:id="chkInternet" text="Internet"/>
         <CheckBox fx:id="chkTelefonica" text="Telefonía"/>
         <CheckBox fx:id="chkTelevision" text="Televisión"/>
     </HBox>
 
-    <HBox spacing="15.0" alignment="CENTER_LEFT">
+    <HBox spacing="15.0" alignment="CENTER">
         <Button text="Seleccionar Foto" onAction="#onSelectPhotoAction"/>
         <ImageView fx:id="imgPhoto" fitWidth="80.0" fitHeight="80.0" preserveRatio="true"/>
     </HBox>

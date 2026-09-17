@@ -9,17 +9,20 @@ import javafx.scene.control.Label;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ToolBar;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import ni.edu.uam.gestionclientes.models.User;
 import ni.edu.uam.gestionclientes.util.AlertHelper;
+import ni.edu.uam.gestionclientes.util.AppShell;
 import ni.edu.uam.gestionclientes.util.SceneManager;
 import ni.edu.uam.gestionclientes.util.Session;
 
 /**
- * Controlador de la Ventana Principal / Menú de Navegación del Sistema.
- * Administra las interacciones con MenuBar, ToolBar, ContextMenu y botones de acceso directo.
+ * Controlador del shell principal de la aplicación: MenuBar, ToolBar y
+ * ContextMenu permanecen fijos mientras el contenido central (contentArea)
+ * cambia según la pantalla a la que se navega.
  */
-public class MainMenuController {
+public class AppShellController {
 
     // --- Componentes de Navegación del Menú (MenuBar) ---
     @FXML
@@ -40,6 +43,9 @@ public class MainMenuController {
     @FXML
     private MenuItem menuAcercaDe;
 
+    @FXML
+    private MenuItem menuAdminPanel;
+
     // --- Componentes de la Barra de Herramientas (ToolBar) ---
     @FXML
     private ToolBar toolBar;
@@ -51,9 +57,19 @@ public class MainMenuController {
     private Button btnToolBarConsulta;
 
     @FXML
+    private Button btnToolBarAdminPanel;
+
+    @FXML
     private Button btnToolBarCerrarSesion;
 
-    // --- Botones Principales de Acceso Directo ---
+    // --- Área de contenido persistente ---
+    @FXML
+    private StackPane contentArea;
+
+    @FXML
+    private VBox homePane;
+
+    // --- Botones de acceso directo en el panel de bienvenida ---
     @FXML
     private Button btnRegistrarCliente;
 
@@ -61,26 +77,9 @@ public class MainMenuController {
     private Button btnConsultarClientes;
 
     @FXML
-    private Button btnCerrarSesion;
-
-    @FXML
-    private Button btnSalir;
-
-    // --- Panel de Administración (solo visible para el rol Admin) ---
-    @FXML
-    private MenuItem menuAdminPanel;
-
-    @FXML
-    private Button btnToolBarAdminPanel;
-
-    @FXML
     private Button btnAdminPanel;
 
-    // --- Área de trabajo donde se activa el Menú Contextual ---
-    @FXML
-    private VBox workspacePane;
-
-    // --- Menú Contextual (ContextMenu) ---
+    // --- Menú Contextual (ContextMenu), disponible en toda el área de trabajo ---
     @FXML
     private ContextMenu contextMenu;
 
@@ -100,17 +99,16 @@ public class MainMenuController {
     @FXML
     private Label lblEstado;
 
-    /**
-     * Inicialización del controlador.
-     */
     @FXML
     public void initialize() {
+        AppShell.init(contentArea, homePane);
+
         User currentUser = Session.getCurrentUser();
         boolean isAdmin = Session.isAdmin();
 
         if (lblEstado != null) {
             lblEstado.setText(currentUser == null
-                    ? "Sistema activo - Menú Principal"
+                    ? "Sistema activo"
                     : "Sesión: " + currentUser.getUsername() + " (" + currentUser.getRole() + ")");
         }
 
@@ -124,11 +122,11 @@ public class MainMenuController {
         setButtonAvailable(btnToolBarAdminPanel, isAdmin);
         setButtonAvailable(btnAdminPanel, isAdmin);
 
-        // VBox no es un Control: no tiene soporte nativo de ContextMenu, así que
-        // se muestra manualmente al detectar el evento de clic derecho.
-        if (workspacePane != null && contextMenu != null) {
-            workspacePane.setOnContextMenuRequested(event ->
-                    contextMenu.show(workspacePane, event.getScreenX(), event.getScreenY()));
+        // StackPane no es un Control: no tiene soporte nativo de ContextMenu, así
+        // que se muestra manualmente al detectar el evento de clic derecho.
+        if (contentArea != null && contextMenu != null) {
+            contentArea.setOnContextMenuRequested(event ->
+                    contextMenu.show(contentArea, event.getScreenX(), event.getScreenY()));
         }
     }
 
@@ -146,9 +144,6 @@ public class MainMenuController {
         }
     }
 
-    /**
-     * Acción para navegar a la ventana de Registro de Cliente.
-     */
     @FXML
     public void onMenuRegistroClick(ActionEvent event) {
         if (!Session.isAdmin()) {
@@ -156,12 +151,9 @@ public class MainMenuController {
                     "Su cuenta tiene acceso de solo lectura y no puede registrar clientes.");
             return;
         }
-        SceneManager.sceneChange("client-registration-view.fxml");
+        SceneManager.setContent("client-registration-view.fxml");
     }
 
-    /**
-     * Acción para navegar al Panel de Administración (solo rol Admin).
-     */
     @FXML
     public void onAdminPanelClick(ActionEvent event) {
         if (!Session.isAdmin()) {
@@ -169,20 +161,14 @@ public class MainMenuController {
                     "Solo un administrador puede acceder al panel de administración.");
             return;
         }
-        SceneManager.sceneChange("admin-panel-view.fxml");
+        SceneManager.setContent("admin-panel-view.fxml");
     }
 
-    /**
-     * Acción para navegar a la ventana de Consulta de Clientes.
-     */
     @FXML
     public void onMenuConsultaClick(ActionEvent event) {
-        SceneManager.sceneChange("client-list-view.fxml");
+        SceneManager.setContent("client-list-view.fxml");
     }
 
-    /**
-     * Acción para cerrar sesión y retornar a la pantalla de Login.
-     */
     @FXML
     public void onCerrarSesionClick(ActionEvent event) {
         boolean confirmar = AlertHelper.showConfirmation(
@@ -196,9 +182,6 @@ public class MainMenuController {
         }
     }
 
-    /**
-     * Acción para salir y cerrar la aplicación.
-     */
     @FXML
     public void onSalirClick(ActionEvent event) {
         boolean confirmar = AlertHelper.showConfirmation(
@@ -212,9 +195,6 @@ public class MainMenuController {
         }
     }
 
-    /**
-     * Acción para mostrar el diálogo Informativo "Acerca De".
-     */
     @FXML
     public void onAcercaDeClick(ActionEvent event) {
         AlertHelper.showInfo(
@@ -224,15 +204,12 @@ public class MainMenuController {
         );
     }
 
-    /**
-     * Acción del Menú Contextual para mostrar información contextual del elemento seleccionado.
-     */
     @FXML
     public void onContextInfoClick(ActionEvent event) {
         AlertHelper.showInfo(
                 "Información del Sistema",
                 "Opciones Contextuales",
-                "Desde este menú principal puedes acceder rápidamente al registro de solicitudes o consultar la lista existente."
+                "Desde aquí puedes acceder rápidamente al registro de solicitudes o consultar la lista existente."
         );
     }
 }
