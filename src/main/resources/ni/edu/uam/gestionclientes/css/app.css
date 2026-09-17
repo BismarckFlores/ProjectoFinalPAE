@@ -23,3 +23,17 @@
 .table-view {
     -fx-background-color: white;
 }
+
+.icon-button {
+    -fx-background-color: transparent;
+    -fx-padding: 4px 10px;
+}
+
+.icon-button:hover {
+    -fx-background-color: #dfe7ee;
+}
+
+.icon-glyph {
+    -fx-font-size: 18px;
+    -fx-text-fill: #1f3a5f;
+}
