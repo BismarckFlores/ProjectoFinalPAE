@@ -10,8 +10,10 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ToolBar;
 import javafx.scene.layout.VBox;
+import ni.edu.uam.gestionclientes.models.User;
 import ni.edu.uam.gestionclientes.util.AlertHelper;
 import ni.edu.uam.gestionclientes.util.SceneManager;
+import ni.edu.uam.gestionclientes.util.Session;
 
 /**
  * Controlador de la Ventana Principal / Menú de Navegación del Sistema.
@@ -64,6 +66,16 @@ public class MainMenuController {
     @FXML
     private Button btnSalir;
 
+    // --- Panel de Administración (solo visible para el rol Admin) ---
+    @FXML
+    private MenuItem menuAdminPanel;
+
+    @FXML
+    private Button btnToolBarAdminPanel;
+
+    @FXML
+    private Button btnAdminPanel;
+
     // --- Área de trabajo donde se activa el Menú Contextual ---
     @FXML
     private VBox workspacePane;
@@ -94,9 +106,26 @@ public class MainMenuController {
     @FXML
     public void initialize() {
         System.out.println("[MainMenuController] Inicializado correctamente.");
+
+        User currentUser = Session.getCurrentUser();
+        boolean isAdmin = Session.isAdmin();
+
         if (lblEstado != null) {
-            lblEstado.setText("Sistema activo - Menú Principal");
+            lblEstado.setText(currentUser == null
+                    ? "Sistema activo - Menú Principal"
+                    : "Sesión: " + currentUser.getUsername() + " (" + currentUser.getRole() + ")");
         }
+
+        // Rol "Usuario Común": acceso de solo lectura, sin registro ni panel de administración.
+        setNodeAvailable(menuRegistro, isAdmin);
+        setNodeAvailable(contextItemRegistro, isAdmin);
+        setButtonAvailable(btnToolBarRegistro, isAdmin);
+        setButtonAvailable(btnRegistrarCliente, isAdmin);
+
+        setNodeAvailable(menuAdminPanel, isAdmin);
+        setButtonAvailable(btnToolBarAdminPanel, isAdmin);
+        setButtonAvailable(btnAdminPanel, isAdmin);
+
         // VBox no es un Control: no tiene soporte nativo de ContextMenu, así que
         // se muestra manualmente al detectar el evento de clic derecho.
         if (workspacePane != null && contextMenu != null) {
@@ -105,12 +134,44 @@ public class MainMenuController {
         }
     }
 
+    private void setNodeAvailable(MenuItem item, boolean available) {
+        if (item != null) {
+            item.setVisible(available);
+            item.setDisable(!available);
+        }
+    }
+
+    private void setButtonAvailable(Button button, boolean available) {
+        if (button != null) {
+            button.setVisible(available);
+            button.setManaged(available);
+        }
+    }
+
     /**
      * Acción para navegar a la ventana de Registro de Cliente.
      */
     @FXML
     public void onMenuRegistroClick(ActionEvent event) {
+        if (!Session.isAdmin()) {
+            AlertHelper.showWarning("Acceso restringido", null,
+                    "Su cuenta tiene acceso de solo lectura y no puede registrar clientes.");
+            return;
+        }
         SceneManager.sceneChange("client-registration-view.fxml");
+    }
+
+    /**
+     * Acción para navegar al Panel de Administración (solo rol Admin).
+     */
+    @FXML
+    public void onAdminPanelClick(ActionEvent event) {
+        if (!Session.isAdmin()) {
+            AlertHelper.showWarning("Acceso restringido", null,
+                    "Solo un administrador puede acceder al panel de administración.");
+            return;
+        }
+        SceneManager.sceneChange("admin-panel-view.fxml");
     }
 
     /**
@@ -132,6 +193,7 @@ public class MainMenuController {
                 "¿Está seguro que desea cerrar la sesión actual?"
         );
         if (confirmar) {
+            Session.logout();
             SceneManager.sceneChange("login-view.fxml");
         }
     }
@@ -161,7 +223,7 @@ public class MainMenuController {
         AlertHelper.showInfo(
                 "Acerca del Sistema",
                 "Sistema de Registro y Consulta de Clientes v1.0",
-                "Desarrollado en JavaFX con arquitectura MVC.\nAsignatura: Programación Orientada a Objetos I."
+                "Desarrollado en JavaFX con arquitectura MVC.\nAsignatura: Programación de Aplicaciones de Escritorio."
         );
     }
 

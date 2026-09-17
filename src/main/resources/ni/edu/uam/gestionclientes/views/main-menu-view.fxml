@@ -8,6 +8,7 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -35,14 +36,30 @@
                     <MenuItem fx:id="menuCerrarSesion" text="Cerrar Sesión" onAction="#onCerrarSesionClick"/>
                     <MenuItem fx:id="menuSalir" text="Salir" onAction="#onSalirClick"/>
                 </Menu>
+                <Menu text="Administración">
+                    <MenuItem fx:id="menuAdminPanel" text="Panel de Administración" onAction="#onAdminPanelClick"/>
+                </Menu>
                 <Menu text="Ayuda">
                     <MenuItem fx:id="menuAcercaDe" text="Acerca De" onAction="#onAcercaDeClick"/>
                 </Menu>
             </MenuBar>
             <ToolBar fx:id="toolBar">
-                <Button fx:id="btnToolBarRegistro" text="Registrar" onAction="#onMenuRegistroClick"/>
-                <Button fx:id="btnToolBarConsulta" text="Consultar" onAction="#onMenuConsultaClick"/>
-                <Button fx:id="btnToolBarCerrarSesion" text="Cerrar Sesión" onAction="#onCerrarSesionClick"/>
+                <Button fx:id="btnToolBarRegistro" onAction="#onMenuRegistroClick" styleClass="icon-button">
+                    <graphic><Label text="📝" styleClass="icon-glyph"/></graphic>
+                    <tooltip><Tooltip text="Registrar Cliente"/></tooltip>
+                </Button>
+                <Button fx:id="btnToolBarConsulta" onAction="#onMenuConsultaClick" styleClass="icon-button">
+                    <graphic><Label text="🔍" styleClass="icon-glyph"/></graphic>
+                    <tooltip><Tooltip text="Consultar Clientes"/></tooltip>
+                </Button>
+                <Button fx:id="btnToolBarAdminPanel" onAction="#onAdminPanelClick" styleClass="icon-button">
+                    <graphic><Label text="⚙" styleClass="icon-glyph"/></graphic>
+                    <tooltip><Tooltip text="Panel de Administración"/></tooltip>
+                </Button>
+                <Button fx:id="btnToolBarCerrarSesion" onAction="#onCerrarSesionClick" styleClass="icon-button">
+                    <graphic><Label text="🚪" styleClass="icon-glyph"/></graphic>
+                    <tooltip><Tooltip text="Cerrar Sesión"/></tooltip>
+                </Button>
             </ToolBar>
         </VBox>
     </top>
@@ -60,6 +77,10 @@
             <HBox spacing="15.0" alignment="CENTER">
                 <Button fx:id="btnRegistrarCliente" text="Registrar Cliente" onAction="#onMenuRegistroClick"/>
                 <Button fx:id="btnConsultarClientes" text="Consultar Clientes" onAction="#onMenuConsultaClick"/>
+            </HBox>
+
+            <HBox spacing="15.0" alignment="CENTER">
+                <Button fx:id="btnAdminPanel" text="Panel de Administración" onAction="#onAdminPanelClick"/>
             </HBox>
 
             <HBox spacing="15.0" alignment="CENTER">
