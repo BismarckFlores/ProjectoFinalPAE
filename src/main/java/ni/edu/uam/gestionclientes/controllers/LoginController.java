@@ -12,6 +12,7 @@ import ni.edu.uam.gestionclientes.dao.UserDaoImpl;
 import ni.edu.uam.gestionclientes.models.User;
 import ni.edu.uam.gestionclientes.util.AlertHelper;
 import ni.edu.uam.gestionclientes.util.SceneManager;
+import ni.edu.uam.gestionclientes.util.Session;
 
 import java.util.Optional;
 
@@ -58,6 +59,7 @@ public class LoginController {
             return;
         }
 
+        Session.login(user.get());
         SceneManager.sceneChange("main-menu-view.fxml");
     }
 
