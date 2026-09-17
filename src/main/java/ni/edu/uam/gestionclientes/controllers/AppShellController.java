@@ -123,8 +123,12 @@ public class AppShellController {
         setButtonAvailable(btnAdminPanel, isAdmin);
 
         // StackPane no es un Control: no tiene soporte nativo de ContextMenu, así
-        // que se muestra manualmente al detectar el evento de clic derecho.
+        // que se muestra manualmente al detectar el evento de clic derecho. Control
+        // activa autoHide internamente antes de mostrar su menú contextual; como
+        // aquí lo hacemos a mano hay que activarlo nosotros, si no el menú nunca se
+        // cierra solo al hacer clic afuera.
         if (contentArea != null && contextMenu != null) {
+            contextMenu.setAutoHide(true);
             contentArea.setOnContextMenuRequested(event ->
                     contextMenu.show(contentArea, event.getScreenX(), event.getScreenY()));
         }

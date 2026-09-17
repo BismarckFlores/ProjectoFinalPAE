@@ -146,6 +146,31 @@
     -fx-background-color: -fx-accent;
 }
 
+/* Los botones de navegación mes/año del popup son Button de JavaFX por dentro
+   y heredan el estilo ".button" de arriba (fondo grande de acento); se
+   restauran a su tamaño e apariencia mínima de flecha. */
+.date-picker-popup .button,
+.date-picker-popup .spinner .button {
+    -fx-background-color: transparent;
+    -fx-padding: 3px 6px;
+    -fx-background-radius: 4px;
+}
+
+.date-picker-popup .button:hover,
+.date-picker-popup .spinner .button:hover {
+    -fx-background-color: -fx-accent-soft;
+}
+
+/* ===== ScrollPane transparente para los formularios largos ===== */
+.scroll-pane, .scroll-pane > .viewport {
+    -fx-background-color: transparent;
+}
+
+.scroll-pane {
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+}
+
 /* ===== MenuBar / ToolBar ===== */
 .menu-bar {
     -fx-background-color: white;

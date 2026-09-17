@@ -12,12 +12,14 @@ public class SceneManager {
 
     private static final String STYLESHEET = "/ni/edu/uam/gestionclientes/css/app.css";
 
-    // Tamaño estándar de la ventana: todas las pantallas lo comparten para que
-    // la app no cambie de tamaño al navegar entre ellas.
+    // Tamaño con el que abre la ventana la primera vez. A partir de ahí, si el
+    // usuario la redimensiona o maximiza, ese tamaño se respeta durante el
+    // resto de la ejecución: nunca se vuelve a crear la Scene desde cero.
     public static final double WINDOW_WIDTH = 960.0;
     public static final double WINDOW_HEIGHT = 640.0;
 
     private static Stage stagePrincipal;
+    private static Scene mainScene;
 
     public static void setStageMain(Stage stage) {
         stagePrincipal = stage;
@@ -33,7 +35,7 @@ public class SceneManager {
             FXMLLoader loader = new FXMLLoader(
                     SceneManager.class.getResource("/ni/edu/uam/gestionclientes/views/" + fxmlFile));
             Parent root = loader.load();
-            applyScene(root);
+            applyRoot(root);
         } catch (Exception e) {
             reportNavigationError(fxmlFile, e);
         }
@@ -85,13 +87,23 @@ public class SceneManager {
                 "No se pudo cargar la pantalla \"" + fxmlFile + "\": " + e);
     }
 
-    private static void applyScene(Parent root) {
-        Scene scene = new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT);
-        URL css = SceneManager.class.getResource(STYLESHEET);
-        if (css != null) {
-            scene.getStylesheets().add(css.toExternalForm());
+    /**
+     * Solo la primera vez crea la Scene (con el tamaño inicial). De ahí en
+     * adelante reutiliza esa misma Scene y solo le cambia el root, así que el
+     * tamaño/maximizado que haya elegido el usuario nunca se pierde al navegar
+     * entre Login y el shell.
+     */
+    private static void applyRoot(Parent root) {
+        if (mainScene == null) {
+            mainScene = new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT);
+            URL css = SceneManager.class.getResource(STYLESHEET);
+            if (css != null) {
+                mainScene.getStylesheets().add(css.toExternalForm());
+            }
+            stagePrincipal.setScene(mainScene);
+            stagePrincipal.show();
+        } else {
+            mainScene.setRoot(root);
         }
-        stagePrincipal.setScene(scene);
-        stagePrincipal.show();
     }
 }
