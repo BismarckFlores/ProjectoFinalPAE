@@ -23,9 +23,8 @@ public class ClientDaoImpl implements Dao<Client, String> {
 
     @Override
     public Optional<Client> searchByID(String id) {
-        // Asumiendo que buscamos por nombre como ID temporal
         return clientList.stream()
-                .filter(client -> client.getFirstName().equalsIgnoreCase(id))
+                .filter(client -> client.getId() != null && client.getId().equalsIgnoreCase(id))
                 .findFirst();
     }
 
