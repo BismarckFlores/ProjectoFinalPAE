@@ -14,6 +14,8 @@ import ni.edu.uam.gestionclientes.util.FileChooserHelper;
 import ni.edu.uam.gestionclientes.util.SceneManager;
 
 import java.io.File;
+import java.util.Locale;
+import java.util.Optional;
 
 public class ClientListController {
 
@@ -37,6 +39,9 @@ public class ClientListController {
 
     @FXML
     private Button btnExport;
+
+    @FXML
+    private Button btnSearch;
 
     @FXML
     private Button btnBack;
@@ -76,6 +81,30 @@ public class ClientListController {
             AlertHelper.showInfo("Exportación", null,
                     "Los datos se exportarían a: " + directory.getAbsolutePath());
         }
+    }
+
+    @FXML
+    public void onSearchAction(ActionEvent event) {
+        Optional<String> input = AlertHelper.showInputDialog(
+                "Buscar Cliente", null, "Ingrese el nombre o apellido a buscar:");
+
+        input.map(String::trim).filter(text -> !text.isEmpty()).ifPresent(query -> {
+            String needle = query.toLowerCase(Locale.ROOT);
+            Client match = tableClients.getItems().stream()
+                    .filter(client -> (client.getFirstName() + " " + client.getLastName())
+                            .toLowerCase(Locale.ROOT).contains(needle))
+                    .findFirst()
+                    .orElse(null);
+
+            if (match == null) {
+                AlertHelper.showInfo("Sin resultados", null,
+                        "No se encontró ningún cliente que coincida con \"" + query + "\".");
+                return;
+            }
+
+            tableClients.getSelectionModel().select(match);
+            tableClients.scrollTo(match);
+        });
     }
 
     @FXML

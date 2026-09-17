@@ -29,6 +29,7 @@
     </TableView>
 
     <HBox spacing="15.0" alignment="CENTER">
+        <Button fx:id="btnSearch" text="Buscar Cliente..." onAction="#onSearchAction"/>
         <Button fx:id="btnExport" text="Exportar a Carpeta..." onAction="#onExportAction"/>
         <Button fx:id="btnBack" text="Volver al Menú" onAction="#onBackAction" cancelButton="true"/>
     </HBox>
